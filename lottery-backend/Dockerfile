@@ -1,18 +1,24 @@
+# Stage 1: Build the application
+FROM maven:3.9.6-eclipse-temurin-17 AS builder
+WORKDIR /app
 
-FROM openjdk:19-alpine AS builder
+# Copy Maven files and download dependencies first
+COPY pom.xml .
+RUN mvn dependency:go-offline
 
-COPY ../../.mvn .mvn
-COPY ../../mvnw .
-COPY ../../pom.xml .
-COPY ../../src src
-RUN chmod +x mvnw
+# Copy source code and build
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-RUN mvn clean package
+# Stage 2: Runtime
+FROM eclipse-temurin:17-jdk-alpine
+WORKDIR /app
 
-FROM openjdk:19-alpine
+# Copy the JAR from builder
+COPY --from=builder /app/target/*.jar app.jar
 
-COPY --from=builder target/*.jar /app.jar
-
+# Expose port
 EXPOSE 8080
 
-ENTRYPOINT ["java","-jar","/app.jar"]
+# Start the app
+ENTRYPOINT ["java","-jar","app.jar"]
