@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 @RequestMapping("/app/ticket")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class TicketController {
     @Autowired

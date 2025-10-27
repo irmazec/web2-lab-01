@@ -1,5 +1,6 @@
 package com.loto.lottery_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.UUID;
@@ -14,6 +15,7 @@ public class Ticket {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "round_id", nullable = false)
+    @JsonBackReference
     private Round round;
 
     @Column(name="round_number", nullable = true)

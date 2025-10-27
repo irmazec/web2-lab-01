@@ -32,7 +32,7 @@ public class TicketService {
                 return null;
             }
             ticket.setRound(currRound);
-            ticketRepository.saveAndFlush(ticket);
+            ticketRepository.save(ticket);
             return ticket;
         }
         return null;

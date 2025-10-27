@@ -1,4 +1,5 @@
 package com.loto.lottery_backend.entity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
@@ -27,7 +28,8 @@ public class Round {
     @Column(name="active", nullable=false)
     private boolean active;
 
-    @OneToMany(mappedBy = "round", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "round", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Ticket> tickets = new ArrayList<>();
 
     public Round() {
@@ -73,5 +75,10 @@ public class Round {
 
     public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    public void addTicket(Ticket ticket) {
+        tickets.add(ticket);
+        ticket.setRound(this);
     }
 }
