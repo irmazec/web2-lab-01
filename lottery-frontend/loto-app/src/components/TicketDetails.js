@@ -1,47 +1,64 @@
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const TicketDetails = ({url}) => {
-    const {isAuthenticated} = useAuth0();
-    const [numbers, setNumbers] = useState("");
-    const [userId, setUserId] = useState(null);
-    const [message, setMessage] = useState("");
+const TicketDetails = ({ url }) => {
+  const { isAuthenticated } = useAuth0();
+  const [numbers, setNumbers] = useState("");
+  const [userId, setUserId] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
-    if (!isAuthenticated){
-        return <p>Ne mozete igrati ako niste ulogirani!</p>
-    }
+  if (!isAuthenticated) {
+    return <p>Ne možete igrati ako niste ulogirani!</p>;
+  }
 
-    const onSubmit = () => {
-        try{
-                const requestBody = {
-                    userId: userId,
-                    numbers: numbers
-                }
+  const onSubmit = (e) => {
+    e.preventDefault(); // prevent form reload
+    setLoading(true);
+    setMessage("");
 
-                const response = fetch(url, {
-                method: "POST",
-                headers: {
-                "Content-Type": "application/json"
-                },
-                body: JSON.stringify(requestBody)
-            });
-        }catch(err){
-            setMessage(err);
-        }
-    }
+    const requestBody = {
+      userId: userId,
+      numbers: numbers
+    };
 
-    return(
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(requestBody)
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error(`Greska: ${response.status}`);
+        return response.json();
+      })
+      .then(() => {
+        setNumbers("");
+        setUserId("");
+      })
+      .catch((err) => {
+        setMessage(`Greska: ${err.message}`);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  return (
     <div className="play-loto">
       <form onSubmit={onSubmit}>
-        <label>
-            Upisite broj osobne iskaznice/putovnice:
-            <input
+        <hr></hr>
+         <label>
+          Upisite broj osobne iskaznice/putovnice:
+          <input
             type="text"
             value={userId}
             onChange={(e) => setUserId(e.target.value)}
             required
-            />
+          />
         </label>
+        <hr></hr>
         <label>
           Upisite brojeve odvojene zarezom:
           <input
@@ -51,10 +68,13 @@ const TicketDetails = ({url}) => {
             required
           />
         </label>
-        <button type="submit">Igraj</button>
+        <hr></hr>
+        <button type="submit" disabled={loading}>
+          Igraj
+        </button>
       </form>
     </div>
-    )
-}
+  );
+};
 
 export default TicketDetails;

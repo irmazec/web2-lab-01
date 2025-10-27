@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "https://web2-lab-01.onrender.com/")
+@CrossOrigin(origins = "https://web2-lab-01.onrender.com")
 public class AdminController {
     @Autowired
     private LotteryRunningService service;

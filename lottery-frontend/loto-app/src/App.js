@@ -1,17 +1,17 @@
 import './App.css';
 import React from 'react';
-import { HashRouter  as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Homepage from './components/Homepage';
 import TicketDetails from './components/TicketDetails';
 
 function App() {
-  const backendUrl = process.env.REACT_APP_BACKEND_URL || "https://web2-lab-01-backend.onrender.com/";
+  const backendUrl = process.env.REACT_APP_BACKEND_URL || 'https://web2-lab-01-backend.onrender.com';
   return (
         <Router>
             <div className="App">
             <Routes>
                 <Route path="/app" element={<Homepage url={`${backendUrl}`}/>}/>
-                <Route path="/app/ticket/pay" element={<TicketDetails url={`${backendUrl}app/ticket/pay`} />} />
+                <Route path="/app/ticket/pay" element={<TicketDetails url={`${backendUrl}/app/ticket/pay`} />} />
             </Routes>
             </div>
         </Router>

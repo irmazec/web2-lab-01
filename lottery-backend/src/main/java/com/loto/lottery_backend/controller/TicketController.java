@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 @RequestMapping("/app/ticket")
-@CrossOrigin(origins = "https://web2-lab-01.onrender.com/")
+@CrossOrigin(origins = "https://web2-lab-01.onrender.com")
 @RestController
 public class TicketController {
     @Autowired

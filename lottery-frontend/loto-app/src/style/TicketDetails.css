@@ -1,4 +1,5 @@
 .play-loto{
-    display:flex;
-    flex-direction: column;
+    display:grid;
+    grid-column: auto;
+    gap:10px;
 }
