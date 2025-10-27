@@ -5,7 +5,7 @@ import Homepage from './components/Homepage';
 import TicketDetails from './components/TicketDetails';
 
 function App() {
-  const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080';
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
   return (
         <Router>
             <div className="App">

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://web2-lab-01-frontend.onrender.com/")
 public class RoundController {
     @Autowired
     private RoundRepository repository;
