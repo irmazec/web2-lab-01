@@ -18,7 +18,7 @@ const TicketDetails = ({url}) => {
                     numbers: numbers
                 }
 
-                fetch(url, {
+                const response = fetch(url, {
                 method: "POST",
                 headers: {
                 "Content-Type": "application/json"
