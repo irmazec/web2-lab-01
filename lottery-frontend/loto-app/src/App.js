@@ -5,7 +5,7 @@ import Homepage from './components/Homepage';
 import TicketDetails from './components/TicketDetails';
 
 function App() {
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  const backendUrl = process.env.REACT_APP_BACKEND_URL || "https://web2-lab-01-backend.onrender.com/";
   return (
         <Router>
             <div className="App">
