@@ -14,16 +14,15 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.UUID;
 
-@RequestMapping("/app/ticket")
-@CrossOrigin(origins = "https://web2-lab-01-frontend.onrender.com")
 @RestController
+@CrossOrigin(origins = "https://web2-lab-01-frontend.onrender.com")
 public class TicketController {
     @Autowired
     private TicketService service;
     @Value("${app.url}")
     private String hostBase;
 
-    @PostMapping("/pay")
+    @PostMapping("/app/ticket/pay")
     public ResponseEntity<byte[]> payTicket(@RequestParam String userId, @RequestParam String numbers){
 
         Ticket ticket = service.payTicket(userId, numbers);
@@ -41,7 +40,7 @@ public class TicketController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    @GetMapping("/{uuid}")
+    @GetMapping("/app/ticket/{uuid}")
     public ResponseEntity<TicketDTO> getTicket(@PathVariable UUID uuid){
         Ticket ticket = service.getTicket(uuid);
         if (ticket != null){
