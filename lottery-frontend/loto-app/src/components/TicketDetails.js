@@ -13,7 +13,7 @@ const TicketDetails = ({ url }) => {
   }
 
   const onSubmit = (e) => {
-    e.preventDefault(); // prevent form reload
+    e.preventDefault();
     setLoading(true);
     setMessage("");
 
@@ -22,12 +22,15 @@ const TicketDetails = ({ url }) => {
       numbers: numbers
     };
 
+    const data = new URLSearchParams();
+    data.append("userId", userId);
+    data.append("numbers", numbers);
     fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(requestBody)
+      body: data
     })
       .then((response) => {
         if (!response.ok) throw new Error(`Greska: ${response.status}`);
