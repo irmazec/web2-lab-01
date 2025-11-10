@@ -16,22 +16,10 @@ const TicketDetails = ({ url }) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
-
-    const requestBody = {
-      userId: userId,
-      numbers: numbers
-    };
-
-    const data = new URLSearchParams();
-    data.append("userId", userId);
-    data.append("numbers", numbers);
-    fetch(url, {
+    fetch(`${url}/app/ticket/pay?userId=${encodeURIComponent(userId)}&numbers=${encodeURIComponent(numbers)}`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: data
-    })
+      })
+
       .then((response) => {
         if (!response.ok) throw new Error(`Greska: ${response.status}`);
         return response.json();
