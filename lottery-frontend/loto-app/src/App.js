@@ -11,7 +11,7 @@ function App() {
             <div className="App">
             <Routes>
                 <Route path="/app" element={<Homepage url={`${backendUrl}`}/>}/>
-                <Route path="/app/ticket/pay" element={<TicketDetails url={`${backendUrl}/app/ticket/pay`} />} />
+                <Route path="/app/ticket/pay" element={<TicketDetails url={`${backendUrl}`} />} />
             </Routes>
             </div>
         </Router>
