@@ -16,7 +16,7 @@ const TicketDetails = ({ url }) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
-    fetch(`${url}/app/ticket/pay?userId=${encodeURIComponent(userId)}&numbers=${encodeURIComponent(numbers)}`, {
+    fetch(`${url}?userId=${encodeURIComponent(userId)}&numbers=${encodeURIComponent(numbers)}`, {
       method: "POST",
       })
 
