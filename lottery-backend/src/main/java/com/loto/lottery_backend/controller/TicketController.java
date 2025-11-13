@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.UUID;
 
-@CrossOrigin(origins = "https://web2-lab-01-frontend.onrender.com")
 @RestController
+@CrossOrigin(origins = "https://web2-lab-01-frontend.onrender.com")
 public class TicketController {
     @Autowired
     private TicketService service;
