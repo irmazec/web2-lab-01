@@ -27,7 +27,7 @@ public class TicketController {
 
         Ticket ticket = service.payTicket(userId, numbers);
         if (ticket != null) {
-            String path = hostBase + "/ticket/" + ticket.getId();
+            String path = hostBase + "/app/ticket/" + ticket.getId();
             try {
                 byte[] qr = QRGenerator.generateQrCode(path);
                 return ResponseEntity.ok()
